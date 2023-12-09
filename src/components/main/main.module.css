@@ -1,0 +1,14 @@
+.Experience {
+    display: block;
+}
+
+label {
+    display : block
+}
+
+.post {
+    height : 30px;
+    width : 50px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
