@@ -1,0 +1,12 @@
+.main {
+    width : 70%;
+    height : 90vh;
+    border : 1px solid #0cd63f;
+    margin : auto;
+    margin-top : 5vh;
+    margin-bottom: 5vh;
+    overflow-y: scroll;
+    
+  
+
+}

@@ -1,0 +1,22 @@
+.modal {
+    width : 60%;
+    margin : auto;
+    aspect-ratio: 1;
+    border : 5px solid black;
+}
+
+
+.box {
+   
+    
+}
+
+.carosuel {
+    width : 100% ;
+    height : 100%;  
+}
+
+.image {
+    width : 100% ;   
+    height : 100%;
+}

@@ -1,3 +1,32 @@
-div {
-    margin-bottom: 20px;
+
+
+.location {
+    display : inline;
+    margin-left:10px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.flex-container {
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.container {
+    display : flex;
+    flex-direction: row;
+}
+
+.icon {
+  height: 100%;
+  color: red;
+}
+.main {
+    border : 1px blue solid;
+    width : 96%;
+    margin : 1%;
+    padding : 1%;
+    background-color: #D7E5CA;
 }
