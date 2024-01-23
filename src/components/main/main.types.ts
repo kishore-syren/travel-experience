@@ -3,6 +3,6 @@ export interface IPostData {
     state : string,
     place : string,
     experience : string,
-    files : FileList | null,
+    files : File[] ,
     date : string
 }

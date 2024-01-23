@@ -1,12 +1,12 @@
 import {Link} from "react-router-dom";
 
-const Home: React.FC = () : React.JSX.Element => {
+const Home: React.FC<{name : string}> = ({name}) : React.JSX.Element => {
     return(<>
           <Link to="/signup">
               <button>SignUp</button>
           </Link>
           <Link to="/login">
-               <button>Login</button>
+               <button className="px-6 h-12 uppercase font-semibold tracking-wider border border-slate-200 text-slate-900">Login</button>
           </Link>
     </>)
 }

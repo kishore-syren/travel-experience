@@ -1,10 +1,13 @@
 import {useState} from  "react";
 import {useNavigate} from "react-router-dom";
+import { getUser } from "../../slices/user";
+import { useDispatch } from "react-redux";
 
-const  Login : React.FC= () : React.JSX.Element => {
+const  Login : React.FC<{name : string}> = ({name }) : React.JSX.Element => {
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const getUserName = (e : React.ChangeEvent<HTMLInputElement>) => {
         setUserName(e.target.value);
@@ -32,9 +35,10 @@ const  Login : React.FC= () : React.JSX.Element => {
                 });
                 const data = await response.json();
                 if (data.exist){
+                    dispatch(getUser(data.userName));
                     navigate('/main');
                 }else{
-                    navigate('/error');
+                    window.alert('user with given credentails not found')
                 }
         }
         catch {

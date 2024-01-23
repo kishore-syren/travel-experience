@@ -2,9 +2,7 @@
     display: block;
 }
 
-label {
-    display : block
-}
+
 
 .post {
     height : 30px;
@@ -12,3 +10,30 @@ label {
     margin-left: 50px;
     margin-top: 50px;
 }
+
+
+.form {
+    width : 80%;
+    border : 2px solid black;
+    padding : 5px;
+    margin-left : auto;
+    margin-right: auto;
+}
+
+a {
+    display: block;
+}
+
+
+
+label {
+    display : inline;
+}
+
+.profile {
+    width : 30%;
+    height : 30vh;
+    display : block;
+}
+
+

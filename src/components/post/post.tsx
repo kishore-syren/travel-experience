@@ -3,9 +3,11 @@ import Styles from "./post.module.css";
 import { FaLocationDot } from "react-icons/fa6";
 import {useState} from "react";
 import PopUpModal from '../popUpModal/popUpModal.tsx';
+import { useSelector } from 'react-redux';
 
 
-const Post : React.FC<{details : IPost}> = ({details}) : React.JSX.Element => {
+const Post : React.FC<{details : IPost, myPost : boolean, updatePosts : Function, posts : IPost[]}> = ({details, myPost, updatePosts, posts}) : React.JSX.Element => {
+    const userName = useSelector((state : any) => state.user.name);
     const [show, setShow] = useState<boolean>(false);
 
     const unHideModal = () => {
@@ -14,6 +16,30 @@ const Post : React.FC<{details : IPost}> = ({details}) : React.JSX.Element => {
 
     const hideModal = () => {
         setShow(false);
+    }
+
+    const deletePost = async (e : React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
+          const body = {
+              id : details._id
+          }
+
+          const response = await fetch('http://localhost:3000/deletepost',{
+                                            method : 'POST',
+                                            headers : {
+                                                'Content-Type' : 'application/json'
+                                            },
+                                            body : JSON.stringify(body)
+                                  })
+          const data = await response.json()
+          if (data.deleted){
+            const newPosts = posts.filter((post) => post._id !== details._id);
+            
+            updatePosts(newPosts);
+            setTimeout(() => alert('Post deleted successfully'), 500);
+            
+          } else {
+            alert('post delete unsuccessful');
+          }
     }
 
     return (
@@ -36,6 +62,8 @@ const Post : React.FC<{details : IPost}> = ({details}) : React.JSX.Element => {
                             })}
                     </label>
            </div>
+           <h1>Posted by {details.user} </h1>
+           {myPost && <button onClick={deletePost}>Delete</button>}
 
            <PopUpModal show={show} onHide={hideModal} modalHeader={details.place} imageURL={details.files}/>
 
