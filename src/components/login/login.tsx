@@ -2,10 +2,12 @@ import {useState} from  "react";
 import {useNavigate} from "react-router-dom";
 import { getUser } from "../../slices/user";
 import { useDispatch } from "react-redux";
+import { useUserLoginMutation } from "../../api/userApi";
 
-const  Login : React.FC<{name : string}> = ({name }) : React.JSX.Element => {
+const  Login : React.FC = () : React.JSX.Element => {
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [userLogin ] = useUserLoginMutation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -26,16 +28,9 @@ const  Login : React.FC<{name : string}> = ({name }) : React.JSX.Element => {
         setPassword("");
         setUserName("");
         try {
-                const response = await fetch('http://localhost:3000/login',{
-                    method : 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(credentails)
-                });
-                const data = await response.json();
+                const data = await userLogin(credentails).unwrap();
                 if (data.exist){
-                    dispatch(getUser(data.userName));
+                    dispatch(getUser({data : data.userName, pic : data.url}));
                     navigate('/main');
                 }else{
                     window.alert('user with given credentails not found')

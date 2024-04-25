@@ -11,21 +11,15 @@ import Experience from './components/experience/experience';
 import { Console } from 'console';
 
 const App = () =>  {
-  const [name, setName] = useState('');
-
-  console.log('rendered');
-
-  const updateUser = (name : string) => {
-    setName(name);
-  }
+ 
 
   return (
     <BrowserRouter>
           <Routes>
-              <Route path="/" element={<Home name={name}/>} />
-              <Route path="/signup"  element={<SignUp name={name} updateUser={updateUser}/>} />
-              <Route path="/main" element={<Main name={name}/>} />
-              <Route path="/login" element={<Login name={name}/>} />
+              <Route path="/" element={<Home/>} />
+              <Route path="/signup"  element={<SignUp />} />
+              <Route path="/main" element={<Main />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/experience" element={<Experience/>} />
               <Route path='/feed' element={<Feed myPost={false}/>} />
               <Route path='/myposts' element={<Feed myPost={true}/>} />

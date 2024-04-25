@@ -24,9 +24,9 @@
   color: red;
 }
 .main {
-    border : 1px blue solid;
+    border : 2px  solid;
     width : 96%;
     margin : 1%;
     padding : 1%;
-    background-color: #D7E5CA;
+    background-color: #D9EDBF;
 }

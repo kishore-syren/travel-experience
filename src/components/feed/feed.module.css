@@ -1,11 +1,12 @@
 .main {
     width : 70%;
     height : 90vh;
-    border : 1px solid #0cd63f;
+    border : 4px solid black;
     margin : auto;
     margin-top : 5vh;
     margin-bottom: 5vh;
     overflow-y: scroll;
+    background-color:rgb(164, 196, 117);
     
   
 

@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-const Home: React.FC<{name : string}> = ({name}) : React.JSX.Element => {
+const Home: React.FC = () : React.JSX.Element => {
     return(<>
           <Link to="/signup">
               <button>SignUp</button>

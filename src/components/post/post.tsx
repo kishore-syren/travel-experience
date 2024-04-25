@@ -4,11 +4,13 @@ import { FaLocationDot } from "react-icons/fa6";
 import {useState} from "react";
 import PopUpModal from '../popUpModal/popUpModal.tsx';
 import { useSelector } from 'react-redux';
+import { useDeletePostMutation } from '../../api/userApi.ts';
 
 
 const Post : React.FC<{details : IPost, myPost : boolean, updatePosts : Function, posts : IPost[]}> = ({details, myPost, updatePosts, posts}) : React.JSX.Element => {
     const userName = useSelector((state : any) => state.user.name);
     const [show, setShow] = useState<boolean>(false);
+    const [deletepost] = useDeletePostMutation();
 
     const unHideModal = () => {
         setShow(true);
@@ -23,14 +25,15 @@ const Post : React.FC<{details : IPost, myPost : boolean, updatePosts : Function
               id : details._id
           }
 
-          const response = await fetch('http://localhost:3000/deletepost',{
-                                            method : 'POST',
-                                            headers : {
-                                                'Content-Type' : 'application/json'
-                                            },
-                                            body : JSON.stringify(body)
-                                  })
-          const data = await response.json()
+        //   const response = await fetch('http://localhost:3000/deletepost',{
+        //                                     method : 'POST',
+        //                                     headers : {
+        //                                         'Content-Type' : 'application/json'
+        //                                     },
+        //                                     body : JSON.stringify(body)
+        //                           })
+        //   const data = await response.json()
+          const data = await deletepost(body).unwrap();
           if (data.deleted){
             const newPosts = posts.filter((post) => post._id !== details._id);
             

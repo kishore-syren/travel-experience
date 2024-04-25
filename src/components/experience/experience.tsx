@@ -5,12 +5,14 @@ import { useSelector } from "react-redux";
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import {VisuallyHiddenInput } from '@chakra-ui/react'
+import { useAddPostMutation } from "../../api/userApi";
 
 const Experience = () => {
     const userName : string = useSelector((state : any) => state.user.name)
     const [state, setState] = useState(false);
     const [data, setData] = useState<IPostData>({country : '', place : '', experience : '', state : '', files : [], date : ''});
     const [imagePreview, setImagePreview] = useState(false);
+    const [addPost] = useAddPostMutation();
 
     
     
@@ -65,7 +67,7 @@ const Experience = () => {
       setData({country : data.country,state : data.state, place : data.place, experience : data.experience, files: data.files, date : e.target.value});
     };
 
-    const submitData = (e : React.FormEvent<HTMLFormElement>) => {
+    const submitData = async (e : React.FormEvent<HTMLFormElement>) => {
          e.preventDefault();
          console.log(data.files)
          const formData = new FormData();
@@ -81,23 +83,13 @@ const Experience = () => {
       }
         formData.append('date', data.date);
 
-        console.log(data);
-        fetch('http://localhost:3000/add', {
-          method: 'POST',
-          body: formData
-        })
-        .then((response) => response.text())
-       
-        .then((data) => {
-          if (data === 'Succesfully added'){
+        const response = await addPost(formData).unwrap();
+        const res = await response.text();
+        if (res === 'Succesfully added'){
             alert('Succesfully added')
-          } else {
+        } else {
             alert('error')
-          }
-        })
-          
-        
-          
+        }  
     }
 
     return (
@@ -123,7 +115,7 @@ const Experience = () => {
                         <label className={Styles["Experience"]}>Experience :  <textarea rows={30} cols={100} maxLength={10000} value={data.experience} onChange={updateExperience}></textarea></label>
                         
                         <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-                                <label>upload Photos/videos  <VisuallyHiddenInput type="file" multiple={true} name='file' accept=".png, .jpg, .jpeg"  onChange={updateFile} /></label>
+                                <label>upload Photos/videos  <VisuallyHiddenInput type="file" multiple={true} name='file' accept=".png, .jpg, .jpeg"  onChange={updateFile} required/></label>
                               
                         </Button>
                         {data.files.length >0 && <h3>{data.files.length} selected</h3>}
